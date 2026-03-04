@@ -4,11 +4,19 @@ import './App.css';
 
 const Home = () => (
     <div className="glass-card">
-        <h1>Smart Parking System</h1>
-        <p>Find and book parking slots in real-time.</p>
+        <span className="badge">Next-Gen Parking Control</span>
+        <h1>SMART<br />PARKING</h1>
+        <p className="hero-text">Experience the future of urban mobility. Real-time slot detection, instant availability, and seamless booking.</p>
         <div className="nav-buttons">
-            <Link to="/dashboard" className="btn">View Dashboard</Link>
-            <Link to="/admin" className="btn secondary">Admin Panel</Link>
+            <Link to="/dashboard" className="btn">LAUNCH DASHBOARD</Link>
+            <Link to="/admin" className="btn secondary">OPERATIONS</Link>
+        </div>
+        <div className="hero-img-container">
+            <img
+                src="/futuristic_smart_city_parking.png"
+                alt="Futuristic Smart City"
+                className="hero-img"
+            />
         </div>
     </div>
 );
