@@ -71,8 +71,10 @@ body {
 .gallery-nav {
     padding: 5vh 8vw;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3vh;
     z-index: 10;
 }
 
@@ -121,11 +123,12 @@ body {
 }
 
 .home-content {
-    max-width: 45vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin: 0 auto;
 }
 
 /* View Containers */
@@ -185,6 +188,7 @@ body {
 .abstract-action-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2vh;
 }
 
