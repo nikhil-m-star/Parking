@@ -9,7 +9,7 @@ const Home = () => (
             <h1>SMART<br />PARKING</h1>
             <p className="hero-text">Real-time slot detection, raw data, aggressive efficiency. Stop circling, start parking.</p>
             <div className="nav-buttons">
-                <Link to="/dashboard" className="btn">DASHBOARD -></Link>
+                <Link to="/dashboard" className="btn">DASHBOARD -&gt;</Link>
                 <Link to="/admin" className="btn secondary">ADMIN PANEL</Link>
             </div>
         </div>
