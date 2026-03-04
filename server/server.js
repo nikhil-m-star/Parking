@@ -42,17 +42,26 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 5000;
 
-// Connect to Neon/PostgreSQL
+// Connect to Neon/PostgreSQL (Non-blocking for Vercel)
 const DATABASE_URL = process.env.DATABASE_URL;
 
 if (!DATABASE_URL) {
-    console.warn('WARNING: DATABASE_URL is not defined in .env');
+    console.error('CRITICAL: DATABASE_URL is not defined in environment variables.');
 }
 
-initDb().then(() => {
-    server.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+// In development, initialize the database and start the server
+if (process.env.NODE_ENV !== 'production') {
+    initDb().then(() => {
+        server.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    }).catch(err => {
+        console.error('Failed to initialize database:', err);
     });
-}).catch(err => {
-    console.error('Failed to initialize database:', err);
-});
+} else {
+    // In production (Vercel), we just initialize the DB. Vercel handles the listening.
+    initDb().catch(err => console.error('Delayed DB init failed:', err));
+}
+
+// Export the app for Vercel
+module.exports = app;
