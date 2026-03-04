@@ -3,40 +3,53 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 const Home = () => (
-    <div className="glass-card">
-        <span className="badge">Next-Gen Parking Control</span>
-        <h1>SMART<br />PARKING</h1>
-        <p className="hero-text">Experience the future of urban mobility. Real-time slot detection, instant availability, and seamless booking.</p>
-        <div className="nav-buttons">
-            <Link to="/dashboard" className="btn">LAUNCH DASHBOARD</Link>
-            <Link to="/admin" className="btn secondary">OPERATIONS</Link>
+    <div className="bento-grid">
+        <div className="bento-item hero-main">
+            <span className="badge">100% Brutal</span>
+            <h1>SMART<br />PARKING</h1>
+            <p className="hero-text">Real-time slot detection, raw data, aggressive efficiency. Stop circling, start parking.</p>
+            <div className="nav-buttons">
+                <Link to="/dashboard" className="btn">DASHBOARD -></Link>
+                <Link to="/admin" className="btn secondary">ADMIN PANEL</Link>
+            </div>
         </div>
-        <div className="hero-img-container">
+        <div className="bento-item hero-side">
+            <h2 style={{ fontSize: '3rem' }}>0%</h2>
+            <p style={{ fontWeight: 900, fontSize: '1.2rem', margin: '10px 0' }}>WASTED TIME</p>
+        </div>
+        <div className="bento-item hero-image">
             <img
-                src="/futuristic_smart_city_parking.png"
-                alt="Futuristic Smart City"
-                className="hero-img"
+                src="/neo_brutalist_parking.png"
+                alt="Neo-Brutalist Isometric Parking Garage"
             />
         </div>
     </div>
 );
 
 const Dashboard = () => (
-    <div className="glass-card">
-        <h1>Parking Dashboard</h1>
-        <p>Real-time slot availability will appear here.</p>
-        <div className="slot-grid">
-            {/* Slots will be mapped here */}
-            <div className="slot free">Slot 1: Free</div>
-            <div className="slot occupied">Slot 2: Occupied</div>
+    <div className="bento-grid">
+        <div className="bento-item" style={{ gridColumn: 'span 12', backgroundColor: 'var(--brutal-yellow)' }}>
+            <h1>Dashboard</h1>
+            <p style={{ fontWeight: 600, fontSize: '1.5rem', margin: 0 }}>LIVE FEED // ZONE ALPHA</p>
+        </div>
+        <div className="bento-item slot-container">
+            <div className="slot-grid">
+                {/* Slots will be mapped here */}
+                <div className="slot free">P-01<br /><span style={{ fontSize: '1rem', display: 'block', marginTop: '10px' }}>FREE</span></div>
+                <div className="slot occupied">P-02<br /><span style={{ fontSize: '1rem', display: 'block', marginTop: '10px' }}>TAKEN</span></div>
+                <div className="slot free">P-03<br /><span style={{ fontSize: '1rem', display: 'block', marginTop: '10px' }}>FREE</span></div>
+                <div className="slot occupied">P-04<br /><span style={{ fontSize: '1rem', display: 'block', marginTop: '10px' }}>TAKEN</span></div>
+            </div>
         </div>
     </div>
 );
 
 const Admin = () => (
-    <div className="glass-card">
-        <h1>Admin Panel</h1>
-        <p>Manage parking locations and view analytics.</p>
+    <div className="bento-grid">
+        <div className="bento-item" style={{ gridColumn: 'span 12', backgroundColor: 'var(--brutal-pink)' }}>
+            <h1 style={{ color: '#fff' }}>Root Access</h1>
+            <p style={{ color: '#fff', fontWeight: 600, fontSize: '1.5rem', margin: 0 }}>SYSTEM DIAGNOSTICS & CONTROL</p>
+        </div>
     </div>
 );
 
