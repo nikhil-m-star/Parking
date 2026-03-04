@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
 
-// Re-apply animations on route change smoothly
 const AnimatedRoutes = ({ children }) => {
     const location = useLocation();
     return <div key={location.pathname}>{children}</div>;
@@ -11,19 +10,21 @@ const AnimatedRoutes = ({ children }) => {
 const Home = () => (
     <div className="editorial-grid">
         <div className="content-column">
-            <span className="badge fade-up delay-1">The Architecture of Arrival</span>
-            <h1 className="fade-up delay-1">Smart<span className="gold-text">Park</span></h1>
-            <p className="hero-text fade-up delay-2">Transcend the ordinary search. Experience an elegant, frictionless arrival with our sovereign real-time slot intelligence.</p>
-            <div className="nav-buttons fade-up delay-3">
-                <Link to="/dashboard" className="btn gold-btn">Enter Dashboard</Link>
-                <Link to="/admin" className="btn secondary">System Operations</Link>
+            <div className="fade-up delay-1">
+                <span className="badge">Elite Intelligence</span>
+            </div>
+            <h1 className="fade-up delay-2">Smart<br /><span className="gradient-text">Parking</span></h1>
+            <p className="hero-text fade-up delay-3">Redefine your arrival. Experience flawless precision and breathtaking efficiency with our real-time telemetry network.</p>
+            <div className="nav-buttons fade-up delay-4">
+                <Link to="/dashboard" className="btn primary-btn">Launch System</Link>
+                <Link to="/admin" className="btn secondary">Admin Access</Link>
             </div>
         </div>
         <div className="image-column fade-up delay-2">
             <div className="image-overlay"></div>
             <img
                 src="/ethereal_luxury_parking.png"
-                alt="Ethereal Architectural Luxury Parking"
+                alt="Elite Ethereal Parking"
                 className="hero-image"
             />
         </div>
@@ -33,31 +34,46 @@ const Home = () => (
 const Dashboard = () => (
     <div className="dashboard-container">
         <div className="section-header fade-up delay-1">
-            <h2 className="gold-text">Live Availability</h2>
-            <p>Real-time slot telemetry for seamless arrival.</p>
+            <h2 className="gradient-text">Live Telemetry</h2>
+            <p>Real-time slot tracking with absolute precision.</p>
         </div>
         <div className="glass-panel fade-up delay-2">
             <div className="slot-grid">
-                {/* Slots will be mapped here */}
                 <div className="slot free fade-up delay-1">
-                    <div className="slot-ring"></div>
-                    <span className="slot-id">01</span>
-                    <span className="status">Available</span>
+                    <div className="slot-header">
+                        <span className="slot-id">01</span>
+                        <div className="slot-icon"></div>
+                    </div>
+                    <div className="slot-body">
+                        <span className="status">Available Space</span>
+                    </div>
                 </div>
                 <div className="slot occupied fade-up delay-2">
-                    <div className="slot-ring occupied"></div>
-                    <span className="slot-id">02</span>
-                    <span className="status">Occupied</span>
+                    <div className="slot-header">
+                        <span className="slot-id">02</span>
+                        <div className="slot-icon"></div>
+                    </div>
+                    <div className="slot-body">
+                        <span className="status">Occupied</span>
+                    </div>
                 </div>
                 <div className="slot free fade-up delay-3">
-                    <div className="slot-ring"></div>
-                    <span className="slot-id">03</span>
-                    <span className="status">Available</span>
+                    <div className="slot-header">
+                        <span className="slot-id">03</span>
+                        <div className="slot-icon"></div>
+                    </div>
+                    <div className="slot-body">
+                        <span className="status">Available Space</span>
+                    </div>
                 </div>
                 <div className="slot occupied fade-up delay-4">
-                    <div className="slot-ring occupied"></div>
-                    <span className="slot-id">04</span>
-                    <span className="status">Occupied</span>
+                    <div className="slot-header">
+                        <span className="slot-id">04</span>
+                        <div className="slot-icon"></div>
+                    </div>
+                    <div className="slot-body">
+                        <span className="status">Occupied</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,12 +83,11 @@ const Dashboard = () => (
 const Admin = () => (
     <div className="admin-container">
         <div className="section-header fade-up delay-1">
-            <h2 className="gold-text">Operations</h2>
-            <p>High-level system oversight and architectural control.</p>
+            <h2 className="gradient-text">System Core</h2>
+            <p>Advanced routing and architectural diagnostics.</p>
         </div>
         <div className="glass-panel diagnostic-panel fade-up delay-2">
-            <div className="scanner-line"></div>
-            <p className="diagnostic-text">DIAGNOSTICS ONLINE</p>
+            <h3 style={{ color: 'var(--c-cyan)', letterSpacing: '0.2em', fontWeight: 600 }}>ALL SYSTEMS NOMINAL</h3>
         </div>
     </div>
 );
@@ -83,7 +98,7 @@ function App() {
             <div className="noise-overlay"></div>
             <div className="app-container">
                 <nav className="navbar fade-up">
-                    <Link to="/" className="logo">Smart<span className="gold-text">Park</span></Link>
+                    <Link to="/" className="logo">Smart<span>Park</span></Link>
                     <div className="links">
                         <Link to="/">Home</Link>
                         <Link to="/dashboard">Dashboard</Link>
