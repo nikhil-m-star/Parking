@@ -122,7 +122,10 @@ body {
 
 .home-content {
     max-width: 45vw;
-    /* Forces empty space on the right side */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 /* View Containers */
