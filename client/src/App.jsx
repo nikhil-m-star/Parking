@@ -14,7 +14,7 @@ const GalleryRoutes = ({ children }) => {
 };
 
 const Experience = () => (
-    <>
+    <div className="home-content">
         <h1 className="huge-title">
             The Stillness<br />
             <span className="italic-accent">of Space.</span>
@@ -26,7 +26,7 @@ const Experience = () => (
             <Link to="/dashboard" className="abstract-link"><span></span> Observe Availability</Link>
             <Link to="/admin" className="abstract-link"><span></span> System Oversight</Link>
         </div>
-    </>
+    </div>
 );
 
 const Observatory = () => (

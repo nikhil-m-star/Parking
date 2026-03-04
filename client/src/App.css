@@ -1,12 +1,12 @@
 :root {
     --void-black: #000000;
     --text-primary: #FFFFFF;
-    --text-faded: #333333;
-    --text-accent: #f5f5dc;
-    /* beige/cream */
+    --text-faded: #777777;
+    --text-accent: #D4AF37;
+    /* Metallic Gold */
     --occupied-red: #4a0404;
-    --spotlight-color: rgba(245, 245, 220, 0.08);
-    /* faint cream spotlight */
+    --spotlight-color: rgba(212, 175, 55, 0.08);
+    /* faint gold spotlight */
 }
 
 * {
@@ -118,6 +118,11 @@ body {
 
 .gallery-links a:hover::after {
     width: 12px;
+}
+
+.home-content {
+    max-width: 45vw;
+    /* Forces empty space on the right side */
 }
 
 /* View Containers */
