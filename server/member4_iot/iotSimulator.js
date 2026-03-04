@@ -16,3 +16,4 @@ async function simulate() {
 }
 
 module.exports = simulate;
+simulate();
