@@ -14,17 +14,25 @@ const GalleryRoutes = ({ children }) => {
 };
 
 const Experience = () => (
-    <div className="home-content">
-        <h1 className="huge-title">
-            The Stillness<br />
-            <span className="italic-accent">of Space.</span>
-        </h1>
-        <p className="poetic-text">
-            Abandon the search. We monitor the absolute void, identifying where your vehicle belongs in the temporal architecture of the city.
-        </p>
-        <div className="abstract-action-list">
-            <Link to="/dashboard" className="abstract-link"><span></span> Observe Availability</Link>
-            <Link to="/admin" className="abstract-link"><span></span> System Oversight</Link>
+    <div className="home-layout">
+        <div className="home-content">
+            <h1 className="huge-title">
+                The Stillness<br />
+                <span className="italic-accent">of Space.</span>
+            </h1>
+            <p className="poetic-text">
+                Abandon the search. We monitor the absolute void, identifying where your vehicle belongs in the temporal architecture of the city.
+            </p>
+            <div className="abstract-action-list">
+                <Link to="/dashboard" className="abstract-link"><span></span> Observe Availability</Link>
+                <Link to="/admin" className="abstract-link"><span></span> System Oversight</Link>
+            </div>
+        </div>
+        <div className="home-art">
+            <div className="wireframe-sphere"></div>
+            <div className="wireframe-sphere"></div>
+            <div className="wireframe-sphere"></div>
+            <div className="art-label">FIG 1. TEMPORAL ARCHITECTURE</div>
         </div>
     </div>
 );
@@ -39,7 +47,6 @@ const Observatory = () => (
         </p>
 
         <div className="art-grid">
-            {/* Instead of boxes, we use massive typography lines */}
             <div className="art-slot free">
                 <div className="slot-number">01.</div>
                 <div className="slot-state">Vacant Form</div>
