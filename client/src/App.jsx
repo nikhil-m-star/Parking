@@ -1,93 +1,73 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
 
-const AnimatedRoutes = ({ children }) => {
+const GalleryRoutes = ({ children }) => {
     const location = useLocation();
-    return <div key={location.pathname}>{children}</div>;
+
+    // Smooth scroll to top on route change to enhance the "installation" feel
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [location.pathname]);
+
+    return <div key={location.pathname} className="view-container">{children}</div>;
 };
 
-const Home = () => (
-    <div className="editorial-grid">
-        <div className="content-column">
-            <div className="fade-up delay-1">
-                <span className="badge">Elite Intelligence</span>
-            </div>
-            <h1 className="fade-up delay-2">Smart<br /><span className="gradient-text">Parking</span></h1>
-            <p className="hero-text fade-up delay-3">Redefine your arrival. Experience flawless precision and breathtaking efficiency with our real-time telemetry network.</p>
-            <div className="nav-buttons fade-up delay-4">
-                <Link to="/dashboard" className="btn primary-btn">Launch System</Link>
-                <Link to="/admin" className="btn secondary">Admin Access</Link>
-            </div>
+const Experience = () => (
+    <>
+        <h1 className="huge-title">
+            The Stillness<br />
+            <span className="italic-accent">of Space.</span>
+        </h1>
+        <p className="poetic-text">
+            Abandon the search. We monitor the absolute void, identifying where your vehicle belongs in the temporal architecture of the city.
+        </p>
+        <div className="abstract-action-list">
+            <Link to="/dashboard" className="abstract-link"><span></span> Observe Availability</Link>
+            <Link to="/admin" className="abstract-link"><span></span> System Oversight</Link>
         </div>
-        <div className="image-column fade-up delay-2">
-            <div className="image-overlay"></div>
-            <img
-                src="/ethereal_luxury_parking.png"
-                alt="Elite Ethereal Parking"
-                className="hero-image"
-            />
-        </div>
-    </div>
+    </>
 );
 
-const Dashboard = () => (
-    <div className="dashboard-container">
-        <div className="section-header fade-up delay-1">
-            <h2 className="gradient-text">Live Telemetry</h2>
-            <p>Real-time slot tracking with absolute precision.</p>
-        </div>
-        <div className="glass-panel fade-up delay-2">
-            <div className="slot-grid">
-                <div className="slot free fade-up delay-1">
-                    <div className="slot-header">
-                        <span className="slot-id">01</span>
-                        <div className="slot-icon"></div>
-                    </div>
-                    <div className="slot-body">
-                        <span className="status">Available Space</span>
-                    </div>
-                </div>
-                <div className="slot occupied fade-up delay-2">
-                    <div className="slot-header">
-                        <span className="slot-id">02</span>
-                        <div className="slot-icon"></div>
-                    </div>
-                    <div className="slot-body">
-                        <span className="status">Occupied</span>
-                    </div>
-                </div>
-                <div className="slot free fade-up delay-3">
-                    <div className="slot-header">
-                        <span className="slot-id">03</span>
-                        <div className="slot-icon"></div>
-                    </div>
-                    <div className="slot-body">
-                        <span className="status">Available Space</span>
-                    </div>
-                </div>
-                <div className="slot occupied fade-up delay-4">
-                    <div className="slot-header">
-                        <span className="slot-id">04</span>
-                        <div className="slot-icon"></div>
-                    </div>
-                    <div className="slot-body">
-                        <span className="status">Occupied</span>
-                    </div>
-                </div>
+const Observatory = () => (
+    <>
+        <h1 className="huge-title" style={{ fontSize: '4vw' }}>
+            Live Observatory.
+        </h1>
+        <p className="poetic-text" style={{ marginBottom: '4vh' }}>
+            A curated reflection of occupied geometries and empty voids.
+        </p>
+
+        <div className="art-grid">
+            {/* Instead of boxes, we use massive typography lines */}
+            <div className="art-slot free">
+                <div className="slot-number">01.</div>
+                <div className="slot-state">Vacant Form</div>
+            </div>
+
+            <div className="art-slot occupied">
+                <div className="slot-number">02.</div>
+                <div className="slot-state">Matter Present</div>
+            </div>
+
+            <div className="art-slot free">
+                <div className="slot-number">03.</div>
+                <div className="slot-state">Vacant Form</div>
+            </div>
+
+            <div className="art-slot occupied">
+                <div className="slot-number">04.</div>
+                <div className="slot-state">Matter Present</div>
             </div>
         </div>
-    </div>
+    </>
 );
 
-const Admin = () => (
-    <div className="admin-container">
-        <div className="section-header fade-up delay-1">
-            <h2 className="gradient-text">System Core</h2>
-            <p>Advanced routing and architectural diagnostics.</p>
-        </div>
-        <div className="glass-panel diagnostic-panel fade-up delay-2">
-            <h3 style={{ color: 'var(--c-cyan)', letterSpacing: '0.2em', fontWeight: 600 }}>ALL SYSTEMS NOMINAL</h3>
+const Oversight = () => (
+    <div className="admin-view">
+        <h1 className="admin-title">Oversight</h1>
+        <div className="admin-status">
+            The architecture is listening.
         </div>
     </div>
 );
@@ -95,24 +75,25 @@ const Admin = () => (
 function App() {
     return (
         <Router>
-            <div className="noise-overlay"></div>
+            <div className="gallery-spotlight"></div>
+
             <div className="app-container">
-                <nav className="navbar fade-up">
-                    <Link to="/" className="logo">Smart<span>Park</span></Link>
-                    <div className="links">
-                        <Link to="/">Home</Link>
-                        <Link to="/dashboard">Dashboard</Link>
-                        <Link to="/admin">Admin</Link>
+                <nav className="gallery-nav">
+                    <Link to="/" className="gallery-logo">Smt.Prk</Link>
+                    <div className="gallery-links">
+                        <Link to="/">Manifesto</Link>
+                        <Link to="/dashboard">Observatory</Link>
+                        <Link to="/admin">Oversight</Link>
                     </div>
                 </nav>
 
-                <AnimatedRoutes>
+                <GalleryRoutes>
                     <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/admin" element={<Admin />} />
+                        <Route path="/" element={<Experience />} />
+                        <Route path="/dashboard" element={<Observatory />} />
+                        <Route path="/admin" element={<Oversight />} />
                     </Routes>
-                </AnimatedRoutes>
+                </GalleryRoutes>
             </div>
         </Router>
     );
