@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-
 :root {
-    --primary: #4f46e5;
-    --secondary: #ec4899;
-    --bg: #0f172a;
-    --glass: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --void-black: #000000;
+    --text-primary: #FFFFFF;
+    --text-faded: #777777;
+    --text-accent: #D4AF37;
+    /* Metallic Gold */
+    --occupied-red: #4a0404;
+    --spotlight-color: rgba(212, 175, 55, 0.08);
+    /* faint gold spotlight */
 }
 
 * {
@@ -15,119 +16,283 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg);
-    color: white;
+    background-color: var(--void-black);
+    color: var(--text-primary);
+    font-family: 'Cormorant Garamond', serif;
     min-height: 100vh;
-    background-image: radial-gradient(circle at top right, #312e81, transparent),
-        radial-gradient(circle at bottom left, #1e1b4b, transparent);
+    overflow-x: hidden;
+    position: relative;
+    /* Extremely subtle noise for texture to prevent banding */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
+/* The Slow, Massive Spotlight that roams the whole page */
+.gallery-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150vw;
+    height: 150vh;
+    background: radial-gradient(circle, var(--spotlight-color) 0%, transparent 60%);
+    z-index: -1;
+    pointer-events: none;
+    animation: roam 35s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    transform: translate(-25vw, -25vh);
+    /* start off-center */
+}
+
+@keyframes roam {
+    0% {
+        transform: translate(-20vw, -30vh);
+    }
+
+    33% {
+        transform: translate(10vw, -10vh);
+    }
+
+    66% {
+        transform: translate(-10vw, 20vh);
+    }
+
+    100% {
+        transform: translate(-30vw, -10vh);
+    }
+}
+
+/* Base Layout - No boxes, just massive padding */
 .app-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.navbar {
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+/* The Non-Navbar */
+.gallery-nav {
+    padding: 5vh 8vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 2rem 0;
+    gap: 3vh;
+    z-index: 10;
 }
 
-.logo {
+.gallery-logo {
+    font-family: 'Cinzel', serif;
     font-size: 1.5rem;
-    font-weight: 800;
-    color: white;
+    letter-spacing: 0.3em;
     text-decoration: none;
-    background: linear-gradient(to right, #818cf8, #c084fc);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
+    font-weight: 300;
+    text-transform: uppercase;
 }
 
-.links a {
-    color: #94a3b8;
+.gallery-links {
+    display: flex;
+    gap: 4vw;
+}
+
+.gallery-links a {
+    color: var(--text-faded);
     text-decoration: none;
-    margin-left: 2rem;
-    transition: color 0.3s;
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.1em;
+    transition: color 1s ease;
+    position: relative;
 }
 
-.links a:hover {
-    color: white;
+.gallery-links a:hover {
+    color: var(--text-primary);
 }
 
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 3rem;
-    margin-top: 4rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+.gallery-links a::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    width: 0px;
+    height: 1px;
+    background-color: var(--text-primary);
+    transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-links a:hover::after {
+    width: 12px;
+}
+
+.home-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* View Containers */
+.view-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 8vw 10vh 8vw;
+    animation: etherealFade 2s ease forwards;
+}
+
+@keyframes etherealFade {
+    0% {
+        opacity: 0;
+        filter: blur(20px);
+        transform: scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: scale(1);
+    }
+}
+
+/* Typography Overhaul */
+.huge-title {
+    font-family: 'Cinzel', serif;
+    font-size: 8vw;
+    font-weight: 200;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4vh;
+    color: var(--text-primary);
+}
+
+.italic-accent {
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text-accent);
+    font-weight: 300;
+}
+
+.poetic-text {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px;
+    color: var(--text-faded);
+    margin-bottom: 8vh;
+    font-style: italic;
+}
+
+/* Abstract Buttons */
+.abstract-action-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+.abstract-link {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    color: var(--text-primary);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.abstract-link span {
+    width: 0;
+    height: 1px;
+    background-color: var(--text-primary);
+    margin-right: 0px;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
+}
+
+.abstract-link:hover span {
+    width: 60px;
+    margin-right: 20px;
+}
+
+/* Dashboard - The Abstract Installation */
+.art-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
+    margin-top: 5vh;
+}
+
+.art-slot {
+    display: flex;
+    align-items: baseline;
+    gap: 5vw;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 4vh;
+    transition: all 1s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.slot-number {
+    font-family: 'Cinzel', serif;
+    font-size: 5rem;
+    font-weight: 100;
+    color: var(--text-primary);
+    min-width: 15vw;
+}
+
+.slot-state {
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    transition: color 1s ease;
+}
+
+.art-slot.free .slot-state {
+    color: var(--text-accent);
+}
+
+.art-slot.free:hover .slot-number {
+    transform: translateX(20px);
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+.art-slot.occupied {
+    opacity: 0.2;
+}
+
+.art-slot.occupied .slot-state {
+    color: var(--occupied-red);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+}
+
+.art-slot.occupied:hover {
+    opacity: 0.4;
+}
+
+/* Admin */
+.admin-view {
+    align-items: center;
     text-align: center;
 }
 
-h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    letter-spacing: -2px;
+.admin-title {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    font-weight: 100;
+    letter-spacing: 0.5em;
+    margin-bottom: 2vh;
 }
 
-p {
-    color: #94a3b8;
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-}
-
-.btn {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
-    transition: transform 0.3s, background 0.3s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    background: #4338ca;
-}
-
-.btn.secondary {
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    margin-left: 1rem;
-}
-
-.btn.secondary:hover {
-    background: var(--glass);
-}
-
-.slot-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.slot {
-    padding: 2rem;
-    border-radius: 16px;
-    font-weight: 600;
-    border: 1px solid var(--glass-border);
-}
-
-.slot.free {
-    background: rgba(34, 197, 94, 0.2);
-    color: #4ade80;
-}
-
-.slot.occupied {
-    background: rgba(239, 68, 68, 0.2);
-    color: #f87171;
+.admin-status {
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-faded);
+    letter-spacing: 0.2em;
 }
