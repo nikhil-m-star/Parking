@@ -19,8 +19,14 @@ app.use(express.json());
 
 // Routes
 app.use('/api/slots', require('./member2_api/slotRoutes.js'));
+app.use('/api/auth', require('./member3_db/authRoutes.js'));
+app.use('/api/reservations', require('./member3_db/reservationRoutes.js'));
 
 const { initDb } = require('./member3_db/db');
+const configureSocketIO = require('./member3_db/socketIO');
+
+// Configure Socket.io for real-time parking events
+const socketIOHelpers = configureSocketIO(io);
 
 // Start IoT Simulator (Member 4)
 const startSimulator = require('./member4_iot/iotSimulator.js');
@@ -31,14 +37,8 @@ app.get('/', (req, res) => {
     res.send('Smart Parking System API is running...');
 });
 
-// Socket.io Connection
-io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
-
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
-    });
-});
+// Expose socket.io helpers globally for use in routes
+app.locals.socketIOHelpers = socketIOHelpers;
 
 const PORT = process.env.PORT || 5000;
 
@@ -51,12 +51,18 @@ if (!DATABASE_URL) {
 
 // In development, initialize the database and start the server
 if (process.env.NODE_ENV !== 'production') {
-    initDb().then(() => {
+    const initDbPromise = initDb().catch(err => {
+        console.warn('⚠️  Database initialization warning:', err.message);
+        console.warn('Server will run but database features unavailable. Add DATABASE_URL to .env');
+    });
+
+    // Start server regardless of database status
+    Promise.resolve(initDbPromise).then(() => {
         server.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
+            console.log(`✅ Server is running on port ${PORT}`);
+            console.log(`📡 Socket.io listening on /parking`);
+            console.log(`\n🔗 http://localhost:${PORT}`);
         });
-    }).catch(err => {
-        console.error('Failed to initialize database:', err);
     });
 } else {
     // In production (Vercel), we just initialize the DB. Vercel handles the listening.
